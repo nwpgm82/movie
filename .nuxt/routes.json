@@ -1,0 +1,26 @@
+[
+  {
+    "name": "contact",
+    "path": "/contact",
+    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\movie\\\\pages\\\\contact.vue",
+    "chunkName": "pages/contact"
+  },
+  {
+    "name": "showTime",
+    "path": "/showTime",
+    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\movie\\\\pages\\\\showTime\\\\index.vue",
+    "chunkName": "pages/showTime/index"
+  },
+  {
+    "name": "showTime-detail",
+    "path": "/showTime/detail",
+    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\movie\\\\pages\\\\showTime\\\\detail.vue",
+    "chunkName": "pages/showTime/detail"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\movie\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]
