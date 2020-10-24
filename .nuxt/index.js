@@ -12,10 +12,10 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_5d209a0f from 'nuxt_plugin_plugin_5d209a0f' // Source: .\\components\\plugin.js (mode: 'all')
-import nuxt_plugin_workbox_35037d4e from 'nuxt_plugin_workbox_35037d4e' // Source: .\\workbox.js (mode: 'client')
-import nuxt_plugin_meta_416bd69f from 'nuxt_plugin_meta_416bd69f' // Source: .\\pwa\\meta.js (mode: 'all')
-import nuxt_plugin_icons_49e97520 from 'nuxt_plugin_icons_49e97520' // Source: .\\pwa\\icons.js (mode: 'all')
+import nuxt_plugin_plugin_5ef708b4 from 'nuxt_plugin_plugin_5ef708b4' // Source: .\\components\\plugin.js (mode: 'all')
+import nuxt_plugin_workbox_935ff39a from 'nuxt_plugin_workbox_935ff39a' // Source: .\\workbox.js (mode: 'client')
+import nuxt_plugin_meta_2c9f2b4c from 'nuxt_plugin_meta_2c9f2b4c' // Source: .\\pwa\\meta.js (mode: 'all')
+import nuxt_plugin_icons_3b592915 from 'nuxt_plugin_icons_3b592915' // Source: .\\pwa\\icons.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -175,20 +175,20 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_5d209a0f === 'function') {
-    await nuxt_plugin_plugin_5d209a0f(app.context, inject)
+  if (typeof nuxt_plugin_plugin_5ef708b4 === 'function') {
+    await nuxt_plugin_plugin_5ef708b4(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_workbox_35037d4e === 'function') {
-    await nuxt_plugin_workbox_35037d4e(app.context, inject)
+  if (process.client && typeof nuxt_plugin_workbox_935ff39a === 'function') {
+    await nuxt_plugin_workbox_935ff39a(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_meta_416bd69f === 'function') {
-    await nuxt_plugin_meta_416bd69f(app.context, inject)
+  if (typeof nuxt_plugin_meta_2c9f2b4c === 'function') {
+    await nuxt_plugin_meta_2c9f2b4c(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_icons_49e97520 === 'function') {
-    await nuxt_plugin_icons_49e97520(app.context, inject)
+  if (typeof nuxt_plugin_icons_3b592915 === 'function') {
+    await nuxt_plugin_icons_3b592915(app.context, inject)
   }
 
   // Lock enablePreview in context

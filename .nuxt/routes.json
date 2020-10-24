@@ -1,26 +1,37 @@
 [
   {
+    "name": "admin",
+    "path": "/admin",
+    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\admin.vue",
+    "chunkName": "pages/admin",
+    "_name": "_57d19174"
+  },
+  {
     "name": "contact",
     "path": "/contact",
-    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\movie\\\\pages\\\\contact.vue",
-    "chunkName": "pages/contact"
+    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\contact.vue",
+    "chunkName": "pages/contact",
+    "_name": "_ece66852"
   },
   {
     "name": "showTime",
     "path": "/showTime",
-    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\movie\\\\pages\\\\showTime\\\\index.vue",
-    "chunkName": "pages/showTime/index"
+    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\showTime\\\\index.vue",
+    "chunkName": "pages/showTime/index",
+    "_name": "_abc38942"
   },
   {
     "name": "showTime-detail",
     "path": "/showTime/detail",
-    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\movie\\\\pages\\\\showTime\\\\detail.vue",
-    "chunkName": "pages/showTime/detail"
+    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\showTime\\\\detail.vue",
+    "chunkName": "pages/showTime/detail",
+    "_name": "_31fc4014"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\movie\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_bab0396e"
   }
 ]

@@ -5,10 +5,11 @@ import NuxtError from './components/nuxt-error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
+import _77068119 from '..\\layouts\\admin.vue'
 import _6f6c098b from '..\\layouts\\default.vue'
 import _2d26a6af from '..\\layouts\\main.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b),"_main": sanitizeComponent(_2d26a6af) }
+const layouts = { "_admin": sanitizeComponent(_77068119),"_default": sanitizeComponent(_6f6c098b),"_main": sanitizeComponent(_2d26a6af) }
 
 export default {
   render (h, props) {

@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container" >
     <div class="showTime">
         <div class="box">
             <div id="main">
@@ -206,7 +206,7 @@ export default {
                     this.sub_theater_room = "3"
                 }
             }
-            var docRef = db.collection(`theater${this.theater_room}-${this.sub_theater_room}`).doc("2020-10-21");
+            var docRef = db.collection(`theater${this.theater_room}-${this.sub_theater_room}`).doc(this.cart.date_input);
             docRef.get().then((doc) => {
                 if (doc.exists) {
                     console.log(`Document data${this.theater_room}-${this.sub_theater_room}:`, doc.data());
@@ -247,7 +247,7 @@ export default {
                         status: false
                     })
                 }
-                db.collection(`theater${this.theater_room}-${this.sub_theater_room}`).doc("2020-10-21").update({
+                db.collection(`theater${this.theater_room}-${this.sub_theater_room}`).doc(this.cart.date_input).update({
                         detail: this.seat_theater
                     })
                     .then(() => {
@@ -259,7 +259,6 @@ export default {
                 selecting_movie.style.display = "none"
                 result.style.display = "block"
                 main.style.display = "none"
-                
 
             }
         },
@@ -281,10 +280,13 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Prompt', sans-serif;
 }
 
 .container {
