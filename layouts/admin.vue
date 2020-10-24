@@ -1,7 +1,10 @@
 <template>
-  <div>
+  <div class="admin">
       <sidebar/>
-      <nuxt/>
+      <div class="content">
+        <nuxt/>  
+      </div>
+      
   </div>
 </template>
 
@@ -24,7 +27,12 @@ export default {
     font-family: 'Prompt', sans-serif;
 }
 
-html,body{
-    background-color: white;
+.admin{
+    background-color: #f3f3f3;
+}
+
+.admin .content{
+    padding: 32px 32px 32px 282px;
+    min-height: 100vh;
 }
 </style>
