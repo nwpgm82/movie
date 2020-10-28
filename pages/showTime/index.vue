@@ -1,7 +1,9 @@
 <template>
 <div class="container">
+     
     <div class="showTime">
         <div class="box">
+            <!-- {{cost_data}} -->
             <div id="main">
                 <!-- {{movielist}} -->
                 <div class="header">
@@ -109,6 +111,7 @@
             <div id="result" style="padding-top:32px;display:none;">
                 <h2 style="color:#d39e00;">ผลการจอง</h2>
                 <div class="result">
+                   
                     <div v-for="(result,index) in seat_select" :key="index" class="ticket">
                         <div class="header_ticket">
                             <img src="~/assets/img/logo.png" alt="">
@@ -158,6 +161,7 @@ export default {
             theater_room: '',
             sub_theater_room: '',
             date: '',
+            cost_data: []
 
         }
     },
@@ -285,8 +289,22 @@ export default {
             console.log(this.seat_select)
         },
 
-        accept() {
+        async accept() {
             if (confirm("คุณต้องการจองตั๋วใช่หรือไม่ ?")) {
+                var docRef = await db.collection("cost").doc(this.cart.date_input);
+
+                await docRef.get().then((doc) => {
+                    if (doc.exists) {
+                        console.log("Document data:", doc.data());
+                        this.cost_data = doc.data().detail
+                        console.log(this.cost_data)
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("No such document!");
+                    }
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                });
                 for (var j = 0; j < this.seat_select.length; j++) {
                     console.log("x", this.seat_select[j])
                     var change = this.seat_theater.filter(el => el.num === this.seat_select[j])
@@ -295,11 +313,30 @@ export default {
                         status: false
                     })
                 }
+                
                 db.collection(`theater${this.theater_room}-${this.sub_theater_room}`).doc(this.cart.date_input).update({
                         detail: this.seat_theater
                     })
                     .then(() => {
                         console.log("Document successfully updated!");
+                    });
+
+                await this.cost_data.push({
+                    price: this.count,
+                    seat: this.seat_select,
+                    theater: this.theater + 1,
+                    title_en: this.cart.title_en,
+                    showTime: this.time_select
+                })
+                console.log(this.cost_data)
+                db.collection("cost").doc(this.cart.date_input).set({
+                        detail: this.cost_data
+                    })
+                    .then(() => {
+                        console.log("Document successfully written!");
+                    })
+                    .catch((error) => {
+                        console.error("Error writing document: ", error);
                     });
                 var main = document.getElementById("main")
                 var selecting_movie = document.getElementById("selecting_movie")
@@ -415,7 +452,7 @@ export default {
 }
 
 .container .showTime .box .grid .sub-grid button {
-    margin:8px 0;
+    margin: 8px 0;
     width: 60px;
     height: 30px;
     border: none;
@@ -483,10 +520,10 @@ export default {
 }
 
 .container .showTime .box .chair {
-        position: relative;
-        width: 400px;
-        margin: auto;
-    }
+    position: relative;
+    width: 400px;
+    margin: auto;
+}
 
 .container .showTime .box .chair .chair-grid button {
     width: 40px;
@@ -594,7 +631,7 @@ export default {
         width: 100%;
     }
 
-    .container .showTime .box .chair{
+    .container .showTime .box .chair {
         width: 100%;
     }
 }
