@@ -35,4 +35,16 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+@media screen and (max-width: 1023px){
+    .main{
+        padding: 100px 50px;
+    }
+}
+
+@media screen and (max-width: 767px){
+    .main{
+        padding: 100px 25px;
+    }
+}
 </style>

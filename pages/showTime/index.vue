@@ -1,19 +1,28 @@
 <template>
-<div class="container" >
+<div class="container">
     <div class="showTime">
         <div class="box">
             <div id="main">
+                <!-- {{movielist}} -->
                 <div class="header">
                     <h2>รอบฉาย</h2>
                 </div>
                 <hr />
-                <div class="grid" v-for="(i,index) in movielist.detail" :key="index">
+                <div>
+                    <input type="date" v-model="date" @change="get_date()">
+                </div>
+                <hr style="margin-top:32px" />
+                <!-- {{movielist}} -->
+                <div v-if="this.movielist == '' ">
+                    ไม่มีรอบหนัง!
+                </div>
+                <div class="grid" v-for="(i,index) in movielist.detail" :key="i.t_num">
                     <div style="border-right:1px solid gainsboro;border-bottom:1px solid gainsboro;padding-top:6px;">
                         <h2>Theater {{i.t_num}}</h2>
                     </div>
                     <div class="sub-grid">
                         <div class="img-box">
-                            <img :src="i.img_url" alt="">
+                            <img :id="`poster${index}`" alt="">
                         </div>
                         <div style="padding-top:6px">
                             <h3>{{i.title_en}}</h3>
@@ -33,7 +42,7 @@
                 <div style="padding-top:32px;" v-if="time_select != ''" id="selecting_movie">
                     <h2>หนังที่เลือก</h2>
                     <div class="select_grid">
-                        <img :src="cart.img_url" alt="">
+                        <img id="movie_poster_select" alt="">
                         <div style="line-height:30px;">
                             <h3>{{cart.title_en}}</h3>
                             <h4>{{cart.title_th}} | วันที่เข้าฉาย {{formatDate(cart.date_input)}} | {{cart.time}} นาที</h4>
@@ -46,7 +55,7 @@
                     <h2>กรุณาเลือกที่นั่ง</h2>
                     <div style="padding-top:32px">
                         <div class="screen">Screen</div>
-                        <div style="position:relative;width:400px;margin:auto">
+                        <div class="chair">
                             <div class="key" style="left:0">
                                 <div class="key-box">
                                     <p>F</p>
@@ -109,13 +118,14 @@
                         <h3>{{cart.title_en}}</h3>
                         <h4>{{cart.title_th}}</h4>
                         <h4>{{formatDate(cart.date_input)}}</h4>
+                        <h4>Theater {{theater+1}}</h4>
                         <h4>เวลา {{time_select}}</h4>
                     </div>
                 </div>
                 <div style="display:flex;justify-content:flex-end;padding-top:32px;">
                     <h4>ราคารวม : {{count_format}} บาท</h4>
                 </div>
-                <div>
+                <div style="margin-top:32px">
                     <a href="/showTime"><button>กลับไปหน้าแรก</button></a>
                 </div>
             </div>
@@ -137,7 +147,7 @@ export default {
     layout: 'main',
     data() {
         return {
-            movielist: {},
+            movielist: "",
             cart: {},
             theater: '',
             time_select: '',
@@ -146,25 +156,63 @@ export default {
             count: 0,
             list: {},
             theater_room: '',
-            sub_theater_room: ''
+            sub_theater_room: '',
+            date: '',
+
         }
     },
     methods: {
         get_movie() {
-            db.collection("showTime").get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    // doc.data() is never undefined for query doc snapshots
-                    // console.log(doc.id, " => ", doc.data());
+            var docRef = db.collection("showTime").doc(this.date);
+            docRef.get().then((doc) => {
+                if (doc.exists) {
+                    // console.log("Document data:", doc.data());
                     this.movielist = doc.data()
                     console.log(this.movielist)
-                });
+                    // console.log(this.movielist.detail[0].img_url)
+                    var storageRef = firebase.storage().ref();
+                    for (let i = 0; i < this.movielist.detail.length; i++) {
+                        var poster = storageRef.child(`images/${this.date}/${this.movielist.detail[i].img_url}`);
+                        // Get the download URL
+                        poster.getDownloadURL().then((url) => {
+                            // Insert url into an <img> tag to "download"
+                            var poster_show = document.getElementById(`poster${i}`);
+                            console.log("x", i)
+                            poster_show.src = url;
+                        }).catch((error) => {
+                            console.log(error)
+                        });
+                    }
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
             });
+        },
+
+        get_date() {
+            var link = `/showTime?date=${this.date}`
+            location.href = link
+            console.log(link)
+            this.get_movie()
         },
 
         get_movieDetail(index, movie, seat_time, num) {
             this.theater = index
             this.time_select = seat_time
             this.cart = movie
+            var storageRef = firebase.storage().ref();
+            var poster = storageRef.child(`images/2020-10-25/${this.cart.img_url}`);
+            // Get the download URL
+            poster.getDownloadURL().then((url) => {
+                // Insert url into an <img> tag to "download"
+                var poster_show = document.getElementById("movie_poster_select");
+                poster_show.src = url;
+            }).catch((error) => {
+                console.log(error)
+            });
             if (this.seat_select.length != 0) {
                 for (var i = 1; i <= this.seat_select.length; i++) {
                     document.getElementById(`chair${this.seat_select[i-1]}`).style.backgroundColor = ""
@@ -268,7 +316,19 @@ export default {
         },
     },
     mounted() {
+        // var d = new Date();
+        // this.date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
+        // console.log(this.date)
+        var url_string = window.location.href
+        var url = new URL(url_string);
+        this.date = url.searchParams.get("date");
+        if (this.date == null) {
+            var d = new Date();
+            this.date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
+            console.log(this.date)
+        }
         this.get_movie()
+
         // this.add_theater()
     },
     computed: {
@@ -287,6 +347,14 @@ export default {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Prompt', sans-serif;
+}
+
+.container .showTime .box input {
+    width: 160px;
+    height: 40px;
+    border: 1px solid #d39e00;
+    border-radius: 4px;
+    padding: 0 12px;
 }
 
 .container {
@@ -347,6 +415,7 @@ export default {
 }
 
 .container .showTime .box .grid .sub-grid button {
+    margin:8px 0;
     width: 60px;
     height: 30px;
     border: none;
@@ -413,7 +482,13 @@ export default {
     border-radius: 4px;
 }
 
-.container .showTime .box .chair-grid button {
+.container .showTime .box .chair {
+        position: relative;
+        width: 400px;
+        margin: auto;
+    }
+
+.container .showTime .box .chair .chair-grid button {
     width: 40px;
     height: 40px;
     margin: auto;
@@ -425,7 +500,7 @@ export default {
     transition: 0.3s;
 }
 
-.container .showTime .box .chair-grid button:disabled {
+.container .showTime .box .chair .chair-grid button:disabled {
     background-color: grey;
     cursor: default;
 }
@@ -493,5 +568,34 @@ export default {
     margin: auto;
     cursor: pointer;
     transition: 0.3s;
+}
+
+@media screen and (max-width: 1200px) {
+    .container {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .container .showTime .box .grid {
+        grid-template-columns: 32% auto;
+    }
+
+    .container .showTime .box .grid h2 {
+        font-size: 18px;
+    }
+
+    .container .showTime .box .grid .sub-grid {
+        display: block;
+        padding: 0 0 8px 8px;
+    }
+
+    .container .showTime .box .screen {
+        width: 100%;
+    }
+
+    .container .showTime .box .chair{
+        width: 100%;
+    }
 }
 </style>
