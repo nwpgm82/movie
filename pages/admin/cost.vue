@@ -15,6 +15,8 @@
             <th>ชื่อหนัง</th>
             <th>เวลาฉาย</th>
             <th>ราคา</th>
+            <th>CODE</th>
+            <th>สถานะการชำระเงิน</th>
         </tr>
         <tr v-for="(i,index) in cost_list" :key="index">
             <td>{{index+1}}</td>
@@ -23,6 +25,8 @@
             <td>{{i.title_en}}</td>
             <td>{{i.showTime}}</td>
             <td>{{i.price}} บาท</td>
+            <td>{{i.code}}</td>
+            <td>{{i.status}}</td>
         </tr>
     </table>
 </div>

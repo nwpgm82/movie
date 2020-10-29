@@ -10,6 +10,9 @@
         <nuxt-link to="/admin/cost">
             <li id="cost">รายได้ในแต่ละวัน</li>
         </nuxt-link>
+        <nuxt-link to="/admin/searchPaid">
+            <li id="paid">ค้นหารายจ่ายลูกค้า</li>
+        </nuxt-link>
         <nuxt-link to="#">
             <li>ออกจากระบบ</li>
         </nuxt-link>

@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-     
+
     <div class="showTime">
         <div class="box">
             <!-- {{cost_data}} -->
@@ -111,7 +111,6 @@
             <div id="result" style="padding-top:32px;display:none;">
                 <h2 style="color:#d39e00;">ผลการจอง</h2>
                 <div class="result">
-                   
                     <div v-for="(result,index) in seat_select" :key="index" class="ticket">
                         <div class="header_ticket">
                             <img src="~/assets/img/logo.png" alt="">
@@ -125,9 +124,11 @@
                         <h4>เวลา {{time_select}}</h4>
                     </div>
                 </div>
-                <div style="display:flex;justify-content:flex-end;padding-top:32px;">
+                <div style="display:flex;justify-content:space-between;padding-top:32px;">
+                    <h4>โค้ด : {{gen_code}}</h4>
                     <h4>ราคารวม : {{count_format}} บาท</h4>
                 </div>
+                <h4 style="color:red;">***โปรดแคปหน้าจอนี้เพื่อนำไปชำระเงินต่อพนักงาน***</h4>
                 <div style="margin-top:32px">
                     <a href="/showTime"><button>กลับไปหน้าแรก</button></a>
                 </div>
@@ -161,7 +162,8 @@ export default {
             theater_room: '',
             sub_theater_room: '',
             date: '',
-            cost_data: []
+            cost_data: [],
+            gen_code: ''
 
         }
     },
@@ -313,20 +315,23 @@ export default {
                         status: false
                     })
                 }
-                
+
                 db.collection(`theater${this.theater_room}-${this.sub_theater_room}`).doc(this.cart.date_input).update({
                         detail: this.seat_theater
                     })
                     .then(() => {
                         console.log("Document successfully updated!");
                     });
-
+                this.gen_code = await this.generate_code(10)
+                console.log("gen", this.gen_code)
                 await this.cost_data.push({
                     price: this.count,
                     seat: this.seat_select,
                     theater: this.theater + 1,
                     title_en: this.cart.title_en,
-                    showTime: this.time_select
+                    showTime: this.time_select,
+                    code: this.gen_code,
+                    status: 'ยังไม่ได้ชำระเงิน'
                 })
                 console.log(this.cost_data)
                 db.collection("cost").doc(this.cart.date_input).set({
@@ -351,6 +356,16 @@ export default {
         formatDate(date) {
             return moment(date).format('DD MMMM YYYY')
         },
+
+        generate_code(length) {
+            var result = '';
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for (var i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
     },
     mounted() {
         // var d = new Date();

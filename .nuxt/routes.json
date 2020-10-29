@@ -28,6 +28,13 @@
     "_name": "_78a50993"
   },
   {
+    "name": "admin-searchPaid",
+    "path": "/admin/searchPaid",
+    "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\admin\\\\searchPaid.vue",
+    "chunkName": "pages/admin/searchPaid",
+    "_name": "_da87674c"
+  },
+  {
     "name": "showTime-detail",
     "path": "/showTime/detail",
     "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\showTime\\\\detail.vue",

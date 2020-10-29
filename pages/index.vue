@@ -51,7 +51,7 @@ export default {
             var d = new Date();
             this.date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
             console.log(this.date)
-            var docRef = db.collection("showTime").doc("2020-10-25");
+            var docRef = db.collection("showTime").doc(this.date);
             docRef.get().then((doc) => {
                 if (doc.exists) {
                     // console.log("Document data:", doc.data());
