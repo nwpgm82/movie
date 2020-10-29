@@ -1,6 +1,6 @@
 <template>
 <div class="box">
-    <h3>สรุปยอด</h3>
+    <h3>ข้อมูลการจอง</h3>
     <hr />
     <h4>ค้นหาตามวันที่</h4>
     <input type="date" name="" id="" v-model="date" @change="get_cost()">

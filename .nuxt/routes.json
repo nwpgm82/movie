@@ -3,49 +3,42 @@
     "name": "contact",
     "path": "/contact",
     "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\contact.vue",
-    "chunkName": "pages/contact",
-    "_name": "_ece66852"
+    "chunkName": "pages/contact"
   },
   {
     "name": "showTime",
     "path": "/showTime",
     "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\showTime\\\\index.vue",
-    "chunkName": "pages/showTime/index",
-    "_name": "_abc38942"
+    "chunkName": "pages/showTime/index"
   },
   {
     "name": "admin-addMovie",
     "path": "/admin/addMovie",
     "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\admin\\\\addMovie.vue",
-    "chunkName": "pages/admin/addMovie",
-    "_name": "_14e774d5"
+    "chunkName": "pages/admin/addMovie"
   },
   {
     "name": "admin-cost",
     "path": "/admin/cost",
     "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\admin\\\\cost.vue",
-    "chunkName": "pages/admin/cost",
-    "_name": "_78a50993"
+    "chunkName": "pages/admin/cost"
   },
   {
     "name": "admin-searchPaid",
     "path": "/admin/searchPaid",
     "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\admin\\\\searchPaid.vue",
-    "chunkName": "pages/admin/searchPaid",
-    "_name": "_da87674c"
+    "chunkName": "pages/admin/searchPaid"
   },
   {
     "name": "showTime-detail",
     "path": "/showTime/detail",
     "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\showTime\\\\detail.vue",
-    "chunkName": "pages/showTime/detail",
-    "_name": "_31fc4014"
+    "chunkName": "pages/showTime/detail"
   },
   {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Users\\\\seaga\\\\Documents\\\\GitHub\\\\movie\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_bab0396e"
+    "chunkName": "pages/index"
   }
 ]
